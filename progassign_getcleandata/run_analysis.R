@@ -1,6 +1,6 @@
 # Set working directory
 # Remove when committing to repo
-#setwd("C:/Users/Ray/Dropbox/Course Material/Data Science Specialization - Coursera/Getting and Cleaning Data - John Hopkins School for Public Health/Programming Assignment")
+setwd("C:/Users/Ray/Dropbox/Course Material/Data Science Specialization - Coursera/Getting and Cleaning Data - John Hopkins School for Public Health/Programming Assignment")
 
 # Load in all necessary data
 ## Activity Labels
@@ -33,7 +33,7 @@ subjectTestActivity <- read.table("./data/test/y_test.txt", col.names = "Activit
 # for each kind of action the particular subject is doing,
 # these are the observation vectors that result
 subjectTrainFeatureVectors <- read.table("./data/train/X_train.txt")
-subjectTestFeatures <- read.table("./data/test/X_test.txt")
+subjectTestFeatureVectors <- read.table("./data/test/X_test.txt")
 
 # Cast to a data frame for each, and assign each column a meaningful name
 actionLabels <- as.character(featureLabels[,2])
