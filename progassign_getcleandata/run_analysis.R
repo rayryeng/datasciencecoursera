@@ -1,6 +1,6 @@
 # Set working directory
 # Remove when committing to repo
-setwd("C:/Users/Ray/Dropbox/Course Material/Data Science Specialization - Coursera/Getting and Cleaning Data - John Hopkins School for Public Health/Programming Assignment")
+#setwd("C:/Users/Ray/Dropbox/Course Material/Data Science Specialization - Coursera/Getting and Cleaning Data - John Hopkins School for Public Health/Programming Assignment")
 
 # Load in all necessary data
 ## Activity Labels
