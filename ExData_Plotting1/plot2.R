@@ -23,7 +23,7 @@ names(subsetData) <- names(namesData)
 # Make the x labels blank as per the requirements
 # No xlabel too
 par(mfrow=c(1,1))
-plot(seq(1,2880), finalSubsetData$Global_active_power, type="l", 
+plot(seq(1,2880), subsetData$Global_active_power, type="l", 
      xlab="", ylab="Global Active Power (kilowatts)", xaxt="n")
 # Create a new axis with custom ticks that denote where each
 # day begins

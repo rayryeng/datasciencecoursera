@@ -22,13 +22,13 @@ names(subsetData) <- names(namesData)
 # Third plot
 # Make the x labels blank, and also don't show it either
 par(mfrow=c(1,1))
-plot(seq(1,2880), finalSubsetData$Sub_metering_1, type="l", 
+plot(seq(1,2880), subsetData$Sub_metering_1, type="l",
      xlab="", ylab="Energy sub metering", col="black", xaxt="n")
 
 # Add in the other two plots.  x values are dummies for now
 # Make them red and blue
-lines(seq(1,2880), finalSubsetData$Sub_metering_2, col="red")
-lines(seq(1,2880), finalSubsetData$Sub_metering_3, col="blue")
+lines(seq(1,2880), subsetData$Sub_metering_2, col="red")
+lines(seq(1,2880), subsetData$Sub_metering_3, col="blue")
 # Custom axis much like the second plot
 axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 

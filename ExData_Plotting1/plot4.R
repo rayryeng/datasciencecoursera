@@ -33,10 +33,10 @@ axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Third plot
 # Exactly like plot3.R
-plot(seq(1,2880), finalSubsetData$Sub_metering_1, type="l", 
+plot(seq(1,2880), subsetData$Sub_metering_1, type="l",
      xlab="", ylab="Energy sub metering", col="black", xaxt="n")
-lines(seq(1,2880), finalSubsetData$Sub_metering_2, col="red")
-lines(seq(1,2880), finalSubsetData$Sub_metering_3, col="blue")
+lines(seq(1,2880), subsetData$Sub_metering_2, col="red")
+lines(seq(1,2880), subsetData$Sub_metering_3, col="blue")
 axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 legend("topright", lty=1, col=c("black","red","blue"), 
        legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
