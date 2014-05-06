@@ -6,7 +6,7 @@ namesData <- read.table("household_power_consumption.txt", header=TRUE, sep=";",
 
 # Now grab the intended data
 # Beginning of February 1st 2007 is on the 66637th row
-# Doing some subsetting work from before, there are 1440 observerations per day
+# Doing some subsetting work from before, there are 1440 observations per day
 # and so to grab Feb 1 and Feb 2, we need 2880 rows
 # Bear in mind that missing values are filled in with ?
 subsetData <- read.table("household_power_consumption.txt", sep=";", 
