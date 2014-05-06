@@ -47,5 +47,5 @@ plot(seq(1,2880), subsetData$Global_reactive_power, type="l",
 axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Save to file
-dev.copy(png, file="plot1.png", width=480, height=480)
+dev.copy(png, file="plot4.png", width=480, height=480)
 dev.off()
