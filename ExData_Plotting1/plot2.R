@@ -17,7 +17,7 @@ names(subsetData) <- names(namesData)
 
 # Create a new array for an actual date object
 #dates <- paste(subsetData$Date, subsetData$Time)
-#datetime <- strptime(dates, "%Y-%m-%d %H:%M:%S")
+#datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
 
 # Second plot
 # Make the x labels blank as per the requirements

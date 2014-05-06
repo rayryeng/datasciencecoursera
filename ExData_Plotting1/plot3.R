@@ -16,8 +16,8 @@ subsetData <- read.table("household_power_consumption.txt", sep=";",
 names(subsetData) <- names(namesData)
 
 # Create a new array for an actual date object
-dates <- paste(subsetData$Date, subsetData$Time)
-datetime <- strptime(dates, "%Y-%m-%d %H:%M:%S")
+#dates <- paste(subsetData$Date, subsetData$Time)
+#datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
 
 # Third plot
 # Make the x labels blank, and also don't show it either
