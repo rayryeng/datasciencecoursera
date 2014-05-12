@@ -16,18 +16,20 @@ subsetData <- read.table("household_power_consumption.txt", sep=";",
 names(subsetData) <- names(namesData)
 
 # Create a new array for an actual date object
-#dates <- paste(subsetData$Date, subsetData$Time)
-#datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
+dates <- paste(subsetData$Date, subsetData$Time)
+datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
 
 # Second plot
 # Make the x labels blank as per the requirements
 # No xlabel too
 par(mfrow=c(1,1))
-plot(seq(1,2880), subsetData$Global_active_power, type="l", 
-     xlab="", ylab="Global Active Power (kilowatts)", xaxt="n")
+plot(datetime, subsetData$Global_active_power, type="l",
+     xlab="", ylab="Global Active Power (kilowatts)")
+#plot(seq(1,2880), subsetData$Global_active_power, type="l", 
+#     xlab="", ylab="Global Active Power (kilowatts)", xaxt="n")
 # Create a new axis with custom ticks that denote where each
 # day begins
-axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
+#axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Save to file
 dev.copy(png, file="plot2.png", width=480, height=480)

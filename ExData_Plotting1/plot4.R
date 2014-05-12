@@ -15,37 +15,37 @@ subsetData <- read.table("household_power_consumption.txt", sep=";",
 names(subsetData) <- names(namesData)
 
 # Create a new array for an actual date object
-#dates <- paste(subsetData$Date, subsetData$Time)
-#datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
+dates <- paste(subsetData$Date, subsetData$Time)
+datetime <- strptime(dates, "%d/%m/%Y %H:%M:%S")
 
 # Make two rows and two columns
 par(mfrow=c(2,2))
 
 # First plot - much like plot1.R except the x-axis is different
-plot(seq(1,2880), subsetData$Global_active_power, type="l", 
-     xlab="", ylab="Global Active Power (kilowatts)", xaxt="n")
-axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
+plot(datetime, subsetData$Global_active_power, type="l", 
+     xlab="", ylab="Global Active Power (kilowatts)")
+#axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Second plot - Plotting the voltage
-plot(seq(1,2880), subsetData$Voltage, type="l", ylab="Voltage", 
-     xlab="datetime", xaxt="n")
-axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
+plot(datetime, subsetData$Voltage, type="l", ylab="Voltage", 
+     xlab="datetime")
+#axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Third plot
 # Exactly like plot3.R
-plot(seq(1,2880), subsetData$Sub_metering_1, type="l",
-     xlab="", ylab="Energy sub metering", col="black", xaxt="n")
-lines(seq(1,2880), subsetData$Sub_metering_2, col="red")
-lines(seq(1,2880), subsetData$Sub_metering_3, col="blue")
-axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
+plot(datetime, subsetData$Sub_metering_1, type="l",
+     xlab="", ylab="Energy sub metering", col="black")
+lines(datetime, subsetData$Sub_metering_2, col="red")
+lines(datetime, subsetData$Sub_metering_3, col="blue")
+#axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 legend("topright", lty=1, col=c("black","red","blue"), 
        legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 # Fourth plot
 # Plot the global inactive power
-plot(seq(1,2880), subsetData$Global_reactive_power, type="l", 
+plot(datetime, subsetData$Global_reactive_power, cex=0.95, type="l", 
      ylab="Global_reactive_power", xlab="datetime", xaxt="n")
-axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
+#axis(1, at = c(1, 1441, 2880), labels=c("Thu", "Fri", "Sat"))
 
 # Save to file
 dev.copy(png, file="plot4.png", width=480, height=480)
