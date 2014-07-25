@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Enhancement using Histogram Equalization</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Image Enhancement using Histogram Equalization">
+  <meta name="author" content="Raymond Phan - Bubl Technology Inc.">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <aside class="gdbar">
+    <img src="assets/img/bubl_logo.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>Image Enhancement using Histogram Equalization</h1>
+    <h2>Developing Data Products Course Project - Coursera</h2>
+    <p>Raymond Phan - Bubl Technology Inc.<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Premise</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Images with poor contrast are those that look too dark, too bright, or too washed out</li>
+<li>If you plot the histogram using the intensity / colour channel for the bins, you will see that the values have little spread</li>
+</ul>
+
+<div style = 'text-align: center;'>
+<img src = "assets/img/friend.jpg" width=300>
+<img src = "assets/img/friend_histogram.png" width=300>
+</div>
+
+<ul>
+<li>By doing histogram equalization, the histogram will become <strong>flat</strong> and give a better contrast image</li>
+<li>The effect of histogram equalization is that it <strong>stretches</strong> the dynamic range of the histogram</li>
+<li>Histograms can easily be converted into discrete PDFs.  You assume that the probability of encountering a particular pixel is fair</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Some Math (for grayscale images)!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Given the bin count \(h_i\) of an intensity \(i\) of an image, the probability of encountering this intensity \(i\) is: \(p_i = \frac{h_i}{MN}\) where \(M\),\(N\) are the number of rows and columns in the image</li>
+<li>To do histogram equalization, you choose the desired intensity levels you want to see, \(L\)</li>
+<li>Given \(L\), the <strong>output</strong> intensity \(g_i\), given an input intensity \(i\) is thus:</li>
+</ul>
+
+<p>\[g_i = (L-1)\sum_{i=0}^{L-1} p_i = \frac{L-1}{MN} \sum_{i=0}^{L-1} h_i\]</p>
+
+<ul>
+<li>The above produces a mapping where we take each pixel with an intensity \(i\) and determine what its output intensity is \(i\)</li>
+<li>The above sum may be familiar to you.  We are essentially computing the <strong>CDF</strong> of the image</li>
+<li>The above equation stretches the histogram so that encountering each pixel is <strong>equiprobable</strong></li>
+<li>By making each pixel equiprobable to be encountered, the best contrast is obtained</li>
+<li>The math in proving the above is beyond the scope of this talk.  <a href="http://www.math.uci.edu/icamp/courses/math77c/demos/hist_eq.pdf">Check this link out for the proof</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Histogram Equalization Demonstration</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Showing the original image</li>
+</ul>
+
+<pre><code class="r">library(png); img &lt;- readPNG(&#39;pout.png&#39;);
+image(t(img)[,nrow(img):1], axes = FALSE, col = grey(seq(0, 1, length = 256)))
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Histogram Equalization Demonstration</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Output  with 256 intensities.  Histogram Equalization source is quite long and can be found on my Github repo</li>
+</ul>
+
+<pre><code class="r">source(&quot;histEq.R&quot;); library(png); img &lt;- readPNG(&#39;pout.png&#39;); outImg &lt;- histEq(img, 256)
+image(t(outImg)[,nrow(outImg):1], axes = FALSE, col = grey(seq(0, 1, length = 256)))
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Premise'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Some Math (for grayscale images)!'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Histogram Equalization Demonstration'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Histogram Equalization Demonstration'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
